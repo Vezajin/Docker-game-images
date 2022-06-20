@@ -1,0 +1,27 @@
+version: '3'
+services:
+  v-rising:
+    container_name: v-rising
+    image: vezajin/vrising:latest
+    #build:
+        #context: .
+    restart: unless-stopped
+    environment:
+      - VR_SERVER_NAME=MyServerName
+      - VR_SAVE_NAME=MyServerSaveName
+      - VR_LIST_ON_MASTER_SERVER=true
+      - VR_MAX_USERS=10
+      - VR_MAX_ADMINS=4
+      - VR_DESCRIPTION="Woooah! Welcome to My dominion!"
+      - VR_PASSWORD=MySuperAwesomePassword
+      - VR_PRESET=StandardPvE
+      - VR_GAME_PORT=9876
+      - VR_QUERY_PORT=9877
+    ports:
+      - "30886:9876/udp"
+      - "30887:9877/udp"
+    volumes:
+      - vrising_data:/home/v-rising-user
+volumes:
+  vrising_data:
+    external: true
