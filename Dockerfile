@@ -15,7 +15,7 @@ RUN apt-get clean \
 
 COPY --chown=v-rising-user:v-rising-user --chmod=777 ./entrypoint.sh /v-rising-user/
 COPY --chown=v-rising-user:v-rising-user --chmod=777 ./init_game.sh /v-rising-user/
-COPY --chown=v-rising-user:v-rising-user --chmod=777 ./ServerGameSettings.json /v-rising-user/.wine/drive_c/users/v-rising-user/AppData/LocalLow/Stunlock Studios/VRisingServer/
+COPY --chown=v-rising-user:v-rising-user --chmod=777 ./ServerGameSettings.json /v-rising-user/.wine/drive_c/users/v-rising-user/AppData/LocalLow/'Stunlock Studios'/VRisingServer/
 
 USER v-rising-user
 WORKDIR /home/v-rising-user
