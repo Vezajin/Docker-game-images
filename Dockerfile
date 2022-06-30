@@ -22,6 +22,9 @@ VOLUME /home/v-rising-user
 
 RUN /v-rising-user/init_game.sh
 
+RUN mkdir -p ./data/Settings
+COPY --chown=v-rising-user:v-rising-user --chmod=777 ./ServerGameSettings.json .data/Settings/
+
 EXPOSE 9876/udp
 EXPOSE 9877/udp
 

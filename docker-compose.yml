@@ -2,7 +2,7 @@ version: '3'
 services:
   v-rising:
     container_name: v-rising
-    image: vezajin/vrising:latest
+    image: vezajin/vrising:beta
     #build:
         #context: .
     restart: unless-stopped
@@ -21,7 +21,7 @@ services:
       - "30886:9876/udp"
       - "30887:9877/udp"
     volumes:
-      - vrising_data:/home/v-rising-user
+      - vrising_data:.data/
 volumes:
   vrising_data:
     external: true
