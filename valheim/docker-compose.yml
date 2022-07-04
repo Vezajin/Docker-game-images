@@ -1,0 +1,24 @@
+version: '3'
+services:
+  v-rising:
+    container_name: valheim
+    image: vezajin/valheim:stable
+    #build:
+        #context: .
+    restart: unless-stopped
+    environment:
+      - V_SERVER_NAME=MyServerName
+      - V_SAVE_NAME=MyServerSaveName
+      - V_PUBLIC=0
+      - V_PASSWORD=MySuperAwesomePassword
+      - V_GAME_PORT=2456
+    ports:
+      - "2456:2456/udp"
+      - "2457:2457/udp"
+    volumes:
+      - valheim_data:/mnt/game
+      - valheim_game:/home/steam-user
+volumes:
+  valheim_game:
+  valheim_data:
+    external: true

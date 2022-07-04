@@ -2,7 +2,7 @@ version: '3'
 services:
   v-rising:
     container_name: v-rising
-    image: vezajin/vrising:beta
+    image: vezajin/vrising:stable
     #build:
         #context: .
     restart: unless-stopped
@@ -17,11 +17,15 @@ services:
       - VR_PRESET=StandardPvE
       - VR_GAME_PORT=9876
       - VR_QUERY_PORT=9877
+      - VR_SAVE_COUNT=20
+      - VR_SAVE_INTERVAL=300
     ports:
-      - "30886:9876/udp"
-      - "30887:9877/udp"
+      - "9876:9876/udp"
+      - "9877:9877/udp"
     volumes:
-      - vrising_data:.data/
+      - vrising_data:/mnt/game
+      - vrising_game:/home/steam-user
 volumes:
+  vrising_game:
   vrising_data:
     external: true
