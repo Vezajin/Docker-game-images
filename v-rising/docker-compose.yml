@@ -2,9 +2,9 @@ version: '3'
 services:
   v-rising:
     container_name: v-rising
-    image: vezajin/vrising:stable
-    #build:
-        #context: .
+    image: vezajin/vrising:latest
+    build:
+        context: .
     restart: unless-stopped
     environment:
       - VR_SERVER_NAME=MyServerName
