@@ -1,0 +1,28 @@
+version: '3'
+services:
+  minecraft:
+    container_name: minecraft
+    image: vezajin/minecraft:stable
+    restart: unless-stopped
+    environment:
+      - MC_VERSION=1.19.1
+      - MC_SERVER_JAR_URL=https://piston-data.mojang.com/v1/objects/8399e1211e95faa421c1507b322dbeae86d604df/server.jar
+      - MC_MAX_RAM=1024M 
+      - MC_MIN_RAM=1024M
+      - MC_SEED=238358354280091
+      - MC_PORT=25565
+      - MC_WORLD=VezajinExample
+      - MC_RCON_PASSWORD=rconPass
+      - MC_RCON_ENABLED=true
+      - MC_WHITELIST_ENABLED=false
+      - MC_MOTD=MarkTest3
+    ports:
+      - "25565:25565"
+      - "25575:25575"
+    volumes:
+      - minecraft_data:/mnt/game
+      - minecraft_config:/home/minecraft-user/game
+volumes:
+  minecraft_config:
+  minecraft_data:
+    external: true
