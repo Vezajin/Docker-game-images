@@ -7,13 +7,14 @@ ENV TZ=Etc/UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
-	&& apt-get install -y tzdata lib32stdc++6 lib32gcc-s1 wget tar libsdl2-dev gettext-base openjdk-18-jre-headless build-essential
+	&& apt-get install -y tzdata lib32stdc++6 lib32gcc-s1 wget tar libsdl2-dev gettext-base openjdk-18-jre-headless git build-essential cron
 
 RUN mkdir -p /mnt/tools/mcrcon
-COPY mcrcon /mnt/tools/mcrcon
-
-RUN cd /mnt/tools/mcrcon && make
-RUN cd /mnt/tools/mcrcon && make install
+WORKDIR /mnt/tools/mcrcon
+RUN git clone https://github.com/Tiiffi/mcrcon.git
+WORKDIR /mnt/tools/mcrcon/mcrcon
+RUN make
+RUN make install
 #RUN ./mcrcon -h
 
 RUN apt-get clean \

@@ -2,20 +2,20 @@
 function gracefulShutdown {
   echo "Shutting down, stopping Minecraft Server!"
   cd /mnt/tools/mcrcon 
-  mcrcon -H 127.0.0.1 -P 25575 -p $MC_RCON_PASSWORD say 'Server is shutting down!'
-  sleep 5s
-  mcrcon -H 127.0.0.1 -P 25575 -p $MC_RCON_PASSWORD save-off
-  mcrcon -H 127.0.0.1 -P 25575 -p $MC_RCON_PASSWORD save-all
-  mcrcon -H 127.0.0.1 -P 25575 -p $MC_RCON_PASSWORD stop
+  mcrcon -H 127.0.0.1 -P 25575 -p $MC_RCON_PASSWORD -w 1 'say Server is shutting down in about 5 seconds!' save-off save-all stop
   echo "Succesfully stopped Minecraft Server."
-  # do something..
 }
 trap gracefulShutdown SIGTERM
 #------ Shutdown ^^ -------
 
+function backup {
+	tar -cvpzf /mnt/game/backup/server-$(date +%F-%H-%M).tar.gz /mnt/game/backup
+}
 
 set -o errexit
 set -o pipefail
+
+
 
 function ensure_server() {
 	cd /home/minecraft-user/game
@@ -38,6 +38,9 @@ function update() {
 
 
 function start() {	
+	crontab "/home/minecraft-user/crontab"
+	cron
+
 	cd /mnt/game
     echo "updating server.properties in case there are any changes"
     rm -f server.properties
@@ -51,6 +54,9 @@ function start() {
 }
 
 case "$1" in
+backup)
+	backup
+	;;
 update)
 	update
 	;;
