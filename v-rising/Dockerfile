@@ -19,7 +19,7 @@ VOLUME /home/steam-user
 
 RUN /home/steam-user/entrypoint.sh update_validate
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=1 CMD pgrep winedbg >/dev/null && exit 1 || exit 0
+HEALTHCHECK --interval=5s --timeout=5s --start-period=35s --retries=1 CMD pgrep winedbg >/dev/null && exit 1 || exit 0
 
 EXPOSE 9876/udp
 EXPOSE 9877/udp
