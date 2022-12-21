@@ -39,18 +39,23 @@ function start() {
 	# Set ENV variables required by ValheimPlus, if it is installed.
 	# https://github.com/valheimPlus/ValheimPlus/blob/799a52a225487cc52e01a3cd77b37aa0e50be048/resources/unix/start_server_bepinex.sh
     if [ -d "/home/steam-user/BepInEx" ]; then
+		echo 'Mods enabled'
 		export DOORSTOP_ENABLE=TRUE
 		export DOORSTOP_INVOKE_DLL_PATH=/home/steam-user/BepInEx/core/BepInEx.Preloader.dll
-		export DOORSTOP_CORLIB_OVERRIDE_PATH=/home/steam-user//unstripped_corlib
-		export LD_LIBRARY_PATH=/home/steam-user/doorstop_libs:$LD_LIBRARY_PATH
-		export LD_PRELOAD=libdoorstop_x64.so:$LD_PRELOAD
-		export DYLD_LIBRARY_PATH=/home/steam-user/doorstop_libs
-		export DYLD_INSERT_LIBRARIES=/home/steam-user/doorstop_libs/libdoorstop_x64.so
+		export DOORSTOP_CORLIB_OVERRIDE_PATH=/home/steam-user/unstripped_corlib
+
+		export LD_LIBRARY_PATH="/home/steam-user/doorstop_libs:$LD_LIBRARY_PATH"
+		export LD_PRELOAD="libdoorstop_x64.so:$LD_PRELOAD"
+		####
+		export LD_LIBRARY_PATH="/home/steam-user/linux64:$LD_LIBRARY_PATH"
+	else
+		echo 'Mods not enabled'
 	fi
 
-    # Set ENV variables required by Valheim server.
+	# Set ENV variables required by Valheim server.
 	export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
 	export SteamAppId=892970
+
 	local start_command="./valheim_server.x86_64 -nographics -batchmode -port ${V_GAME_PORT:-2456} -name '${V_SERVER_NAME:-A Valheim server}' -world '${V_SAVE_NAME:-Dedicated}' -password '${V_PASSWORD:-secret}' -savedir '/mnt/game' -public ${V_PUBLIC:-0}"
 
 	

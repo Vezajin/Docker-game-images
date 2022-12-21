@@ -10,7 +10,9 @@ VOLUME /mnt/game
 
 RUN chmod u+w /mnt/game
 
+
 COPY --chown=steam-user:steam-user --chmod=777 ./entrypoint.sh /home/steam-user/
+RUN chown -R steam-user:steam-user /home/steam-user
 
 USER steam-user
 WORKDIR /home/steam-user

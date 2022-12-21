@@ -1,0 +1,1 @@
+docker exec -it --user root <<containerid>> chown -R steam-user:steam-user /home/steam-user/

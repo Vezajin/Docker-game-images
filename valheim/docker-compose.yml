@@ -1,10 +1,10 @@
 version: '3'
 services:
-  v-rising:
+  valheim:
     container_name: valheim
     image: vezajin/valheim:stable
-    #build:
-        #context: .
+    build:
+        context: .
     restart: unless-stopped
     environment:
       - V_SERVER_NAME=MyServerName
